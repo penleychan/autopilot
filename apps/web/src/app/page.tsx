@@ -1,3 +1,5 @@
+"use client";
+
 import Image, { type ImageProps } from "next/image";
 import { Button } from "@repo/ui/button";
 import styles from "./page.module.css";
@@ -6,6 +8,9 @@ type Props = Omit<ImageProps, "src"> & {
   srcLight: string;
   srcDark: string;
 };
+
+import { callAgent } from "./actions";
+import { useEffect } from "react";
 
 const ThemeImage = (props: Props) => {
   const { srcLight, srcDark, ...rest } = props;
@@ -19,6 +24,12 @@ const ThemeImage = (props: Props) => {
 };
 
 export default function Home() {
+  useEffect(() => {
+    callAgent().then((text) => {
+      console.log(text);
+    });
+  }, []);
+
   return (
     <div className={styles.page}>
       <main className={styles.main}>
